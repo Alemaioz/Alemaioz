@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.classList.toggle('nav-active');
     });
 
-     // --- INIZIO BLOCCO PER TRANSIZIONE FLUIDA, QUANDO SI CLICCA SU UN LINK DAL MENU MOBILE PRIMA SI CHIUDE IL MENU CON ANIMAZIONE POI PARTE IL CARICAMENTO DELLA PAGINA---
+// --- INIZIO BLOCCO PER TRANSIZIONE FLUIDA, QUANDO SI CLICCA SU UN LINK DAL MENU MOBILE PRIMA SI CHIUDE IL MENU CON ANIMAZIONE POI PARTE IL CARICAMENTO DELLA PAGINA---
 
     document.querySelectorAll('header nav ul li a').forEach(link => {
       link.addEventListener('click', function(e) {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Su desktop o se il menu non è attivo, lascia il comportamento normale
       });
     });
-    // --- FINE BLOCCO PER TRANSIZIONE FLUIDA ---
+// --- FINE BLOCCO PER TRANSIZIONE FLUIDA ---
 
     document.querySelectorAll('header nav ul li a').forEach(link => {
       link.addEventListener('click', function(e) {
@@ -65,14 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Lascia che il browser navighi normalmente
       });
     });
-
 });
 
 
 
 //HEADER CHE SCOMPARE E RICOMPARE ALLO SCROLL//
 // --- Logica per nascondere/mostrare l'header con VELOCITÀ dello scroll (Versione CORRETTA) ---
-
+/* MOMENTANEAMENTE DISATTIVATA
 let lastScrollTop = 0;
 const header = document.querySelector('header');
 
@@ -111,6 +110,17 @@ window.addEventListener('scroll', function() {
     // Aggiorna i valori per il prossimo evento
     lastScrollTop = scrollTop;
     lastScrollTime = currentTime;
+});
+*/
+
+//HEADER CHE DIVENTA OPACO AL PASSAGGIO DEL MOUSE E ALLO SCROLL//
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (window.scrollY > 80) {
+        header.classList.add('navbar-scrolled');
+    } else {
+        header.classList.remove('navbar-scrolled');
+    }
 });
 
 

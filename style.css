@@ -72,7 +72,9 @@ html {
     border-radius: 50%;
 }
 
-.mobile-logo-container {
+/*Il logo non deve apparire su desktop in quanto questo è un contenitore 
+per il logo fixed che si sovrappone quando apro il menu hamburger*/
+.mobile-logo-container { 
     display: none;
 }
 
@@ -82,16 +84,23 @@ html {
 
 /* --- Barra di Navigazione --- */
 header {
+    position: sticky;
     display: flex;
     align-items: center;
     width: 100%;
     min-height: 60px;
     padding: 5px 0;
-    background-color: #ffffff;
-    position: sticky;
+    background-color: transparent;
+    box-shadow: none;
     top: 0;
     z-index: 100;
-    transition: transform 0.4s ease-in-out;
+    transition: background-color 0.6s, box-shadow 1s;
+}
+
+header.navbar-scrolled,
+header:hover {
+    background-color: #fff;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.1);
 }
 
 /*L'ombra sotto l'header*/
@@ -102,13 +111,21 @@ header::after {
     left: 0;
     width: 100%;
     height: 80px;
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: none;
     z-index: -1; /* Mette l'ombra dietro l'header, facendola sporgere solo sotto */
+    transition: box-shadow 1s;
 }
 
+header.navbar-scrolled::after,
+header:hover::after {
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/*PER FAR SCORRERE VIA LA NAVBAR
 .header-hidden {
     transform: translateY(-100%);
-}
+} */
 
 header .container {
     width: 100%;
@@ -128,7 +145,7 @@ header .container {
 
 /* Regola per l'immagine del logo stessa */
 .logo img {
-    height: 80px;  /* Imposta l'altezza desiderata per il logo */
+    height: 60px;  /*Il logo comanda su tutto l'header */
     width: auto;   /* La larghezza si adatta in automatico */
 }
 
@@ -153,10 +170,11 @@ nav a:hover {
 
 /* --- Bottoni --- */
 .btn {
-    padding: 12px 24px;
+    font-family: 'Montserrat', sans-serif; /*Sto specificando un font solo per i bottoni */
+    padding: 10px 28px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: inline-flex;
     align-items: center;
@@ -172,7 +190,7 @@ nav a:hover {
 .btn-primary {
     color: #fff;
     border: 1px solid transparent;
-    background: linear-gradient(135deg, #267dff, #0044ff);
+    background: linear-gradient(135deg, #0066ff, #0044ff);
     transition: all 0.3s ease; /* Transizione per un hover più fluido */
 }
 
@@ -182,9 +200,9 @@ nav a:hover {
 }
 
 .btn-secondary {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ccc;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #000000;
 }
 
 .btn svg {
@@ -243,7 +261,8 @@ footer {
 
 /*Prima sezione  */
 .page-title-section {
-    padding: 80px 0;
+    padding: 160px 0;
+    margin-top: -80px;
     background-color: #fff;
     text-align: center;
     border-bottom: 1px solid #e9ecef; /* Bordo sottile per separare */
@@ -733,11 +752,31 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 
 /* --- Breakpoint per Mobile (e schermi piccoli) --- */
 @media (max-width: 768px) {
-    
-    /*/// I TESTI IN H1 SONO PIU' PICCOLI SU MOBILE///*/
+
+    * { /*Per evitare che il colore di sfondo del bottone venga evidenziato quando si preme su mobile*/
+        -webkit-tap-highlight-color: transparent;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+/* --- REGOLE GENERALI --- */ /*Per far si che determinati testi si allineino a sinistra su mobile*/
+.text-left-mobile,
+.text-left-mobile h2,
+.text-left-mobile p,
+.text-left-mobile .btn {
+    text-align: left;
+}
+
+.btn-left-mobile-wrapper {
+    text-align: left;
+}
 
 
-/* Home Page */
+/* --- HOME PAGE --- */
+
+/* Nascondo l'immagine hero su mobile per avere intestazione e CTA above the fold*/
+.hero-image { 
+    display: none;
+}
 
 /* --- STILI PER IL LOGO NEL MENU MOBILE --- */
 
@@ -755,7 +794,7 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 
 /* Stile dell'immagine del logo */
 .mobile-logo-container img {
-    height: 80px; /* Diamo la stessa altezza del logo principale */
+    height: 60px; /* Diamo la stessa altezza del logo principale */
     width: auto;
 }
 
@@ -845,19 +884,35 @@ header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
 
 .hero-section { flex-direction: column-reverse; text-align: center; }
 .hero-text p { margin-left: auto; margin-right: auto; }
-.hero-buttons { flex-direction: column; align-items:center; justify-content: center; } /*I BOTTONI SU MOBILE DIVENTANO IMPILATI*/
-.hero-buttons .btn { /*LARGHEZZA UGUALE PER I BOTTONI IMPILATI CON TESTI DIFFERENTI */
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* -Momentaneamente disattivata- LARGHEZZA UGUALE PER I BOTTONI IMPILATI CON TESTI DIFFERENTI 
+.hero-buttons .btn { /*
     width: 90%;
     max-width: 320px;
     text-align: center;
-    }
+    } 
+    */
 
 .image-circle-background { width: 280px; height: 280px; }
 .hero-text h1 { font-size: 40px; }
+.projects-section {padding: 30px 0;} /*Su mobile fornisco un padding specifico per la sezione progetti*/
 .projects-grid { grid-template-columns: 1fr; }
 .section-title h2 { font-size: 32px; }
 .about-content { flex-direction: column; gap: 20px;}
 .about-text { text-align: center; order: 2; }
+.about-text .btn-left-mobile {
+    display: inline-block;
+    margin-left: 0;
+    margin-right: auto;
+    width: auto;
+    text-align: left;
+}
 .about-image { order: 1; width: 100%; margin-bottom: 40px; }
 .about-text h2 { font-size: 32px; }
 .process-steps { flex-direction: column; align-items: center; }
@@ -892,7 +947,6 @@ header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
         grid-template-columns: 1fr; /* Una colonna su mobile */
     }
 
-    
 }
 
 
@@ -953,39 +1007,31 @@ header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
 .scroll-animate.delay-1 {
     transition-delay: 0.1s;
 }
-
 .scroll-animate.delay-2 {
     transition-delay: 0.2s;
 }
-
 .scroll-animate.delay-3 {
     transition-delay: 0.3s;
 }
-
 .scroll-animate.delay-4 {
     transition-delay: 0.4s;
 }
-
 .scroll-animate.delay-5 {
     transition-delay: 0.5s;
 }
-
 /* Animazione per le card dei progetti */
 .project-card.scroll-animate {
     transform: translateY(60px) scale(0.95);
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 .project-card.scroll-animate.animate-in {
     transform: translateY(0) scale(1);
 }
-
 /* Animazione per i passi del processo */
 .process-step.scroll-animate {
     transform: translateY(40px);
     transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 .process-step.scroll-animate.animate-in {
     transform: translateY(0);
 }
@@ -1009,4 +1055,5 @@ header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
 .hero-image.scroll-animate.animate-in {
     transform: translateY(0) scale(1);
 }
+
 

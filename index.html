@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex"> <!-- per evitare che il sito venga indicizzato da google -->
     <title>Alessandro Maiorana - Portfolio</title>
     <link rel="icon" type="image/svg+xml" href="logoAM.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -25,7 +27,7 @@
 
             <nav>
                 <ul>
-                    <li class="mobile-logo-container">
+                    <li class="mobile-logo-container"><!--Un container per il logo che si sovrappone quando apro il menu hamburger-->
                     <a href="index.html">
                         <img src="logoAMDesignlinear.svg" alt="Logo di Alessandro Maiorana">
                     </a>
@@ -74,7 +76,7 @@
 
         <section class="projects-section">
         <div class="container">
-            <div class="section-title scroll-animate">
+            <div class="section-title scroll-animate text-left-mobile">
                 <h2>Dall'analisi degli obiettivi alla realizzazione del prodotto</h2>
                 <p>
                     Una selezione di lavori che illustrano il mio processo:
@@ -137,7 +139,7 @@
     <section class="about-section">
         <div class="container">
             <div class="about-content">
-                <div class="about-text scroll-animate slide-left">
+                <div class="about-text scroll-animate slide-left text-left-mobile">
                     <h2>Dalle Persone al Design</h2>
                     <p>
                         Anni di esperienza nella gestione di team e a diretto contatto con i clienti
@@ -150,7 +152,8 @@
                         Il mio approccio non parte dalla tecnologia, ma dall'ascolto empatico,
                         per tradurre bisogni complessi in soluzioni intuitive, funzionali e di valore.
                     </p>
-                    <a href="aboutme.html" class="btn btn-primary">Il mio percorso</a>
+                    <!--Ho creato un contenitore per il button per far si che il solo bottone si allinei a sinistra su mobile-->
+                    <div class="btn-left-mobile-wrapper"><a href="aboutme.html" class="btn btn-primary btn-left-mobile">Il mio percorso</a></div>
                 </div>
 
                 <div class="about-image scroll-animate slide-right">
@@ -210,8 +213,8 @@
                 Progetto soluzioni che mettono davvero l'utente al centro. 
                 Se stai cercando un approccio strategico e sensibile al design, parliamone.
             </p>
-            <div class="cta-buttons scroll-animate fade-in delay-3">
-                <a href="contact.html" class="btn btn-primary">Start a Conversation</a>
+            <div class="cta-buttons hero-buttons scroll-animate fade-in delay-3">
+                <a href="contact.html" class="btn btn-primary">Contattami</a>
                 <a href="#" class="btn btn-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     <span>Download Resume</span>

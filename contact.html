@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex"> <!-- per evitare che il sito venga indicizzato da google -->
     <title>Contatti - Alessandro Maiorana</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,11 +23,18 @@
             </a>
             <nav>
                 <ul>
+                    <li class="mobile-logo-container"><!--Un container per il logo che si sovrappone quando apro il menu hamburger-->
+                    <a href="index.html">
+                        <img src="logoAMDesignlinear.svg" alt="Logo di Alessandro Maiorana">
+                    </a>
+                    </li>
+
                     <li><a href="index.html">Home</a></li>
                     <li><a href="aboutme.html">Chi sono</a></li>
                     <li><a href="contact.html">Contatti</a></li>
                 </ul>
             </nav>
+
 
             <button class="hamburger">
                 <span class="bar"></span>
@@ -37,7 +45,7 @@
     </header>
 
     <main>
-        <section class="page-title-section scroll-animate fade-in">
+        <section class="page-title-section scroll-animate fade-in" data-navbar-color="white">
             <div class="container-narrow">
                 <h2 class="scroll-animate fade-in">Creiamo qualcosa di valore, insieme?</h2>
                 <p class="scroll-animate fade-in delay-1">
@@ -46,7 +54,7 @@
             </div>
         </section>
 
-        <section class="contact-options-section scroll-animate fade-in">
+        <section class="contact-options-section scroll-animate fade-in" data-navbar-color="gray">
             <div class="container">
                 <div class="contact-grid">
 
