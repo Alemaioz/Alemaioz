@@ -78,6 +78,29 @@ per il logo fixed che si sovrappone quando apro il menu hamburger*/
     display: none;
 }
 
+@media (max-width: 768px) {
+  .mobile-logo-container {
+    position: fixed;
+    top: -15px;
+    left: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.2s ease-in-out;
+    display: list-item;
+  }
+  .mobile-logo-container img {
+    height: 60px;
+    width: auto;
+    /* RIMOSSO OGNI MASCHERA */
+    transition: none;
+  }
+  header nav ul.nav-active .mobile-logo-container {
+    opacity: 1;
+    pointer-events: all;
+    transition-delay: 0.2s;
+  }
+}
+
 /* =========================== */
 /* STILI DEI COMPONENTI COMUNI */
 /* =========================== */
@@ -97,10 +120,13 @@ header {
     transition: background-color 0.6s, box-shadow 1s;
 }
 
-header.navbar-scrolled,
+header.navbar-scrolled, /*Come diventa la navbar quando scrollo*/
 header:hover {
-    background-color: #fff;
-    box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.85); /* bianco trasparente */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* per Safari */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: background-color 0.6s, box-shadow 1s, backdrop-filter 0.6s;
 }
 
 /*L'ombra sotto l'header*/
@@ -114,11 +140,6 @@ header::after {
     box-shadow: none;
     z-index: -1; /* Mette l'ombra dietro l'header, facendola sporgere solo sotto */
     transition: box-shadow 1s;
-}
-
-header.navbar-scrolled::after,
-header:hover::after {
-    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -149,12 +170,25 @@ header .container {
     width: auto;   /* La larghezza si adatta in automatico */
 }
 
-nav ul {
-    list-style: none;
+nav {
     display: flex;
-    gap: 25px;
+    align-items: center;
+    gap: 20px; /* spazio tra ul e bottone */
+  }
+  
+  /* Spazio tra i link e la CTA */
+  .nav-cta {
+    margin-left: 30px;
+    /* Puoi aggiungere altre regole per dimensioni, padding, ecc. */
+  }
+
+nav ul {
+    display: flex;
+    align-items: center; /* Centra verticalmente i link */
+    gap: 25px; /* Mantieni il gap tra i link */
     margin: 0;
     padding: 0;
+    list-style: none;
 }
 
 nav a {
@@ -195,6 +229,7 @@ nav a:hover {
 }
 
 .btn-primary:hover {
+    color: #fff;
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); /* Aggiunge un'ombra bluastra */
     transform: translateY(-2px);
 }
@@ -483,7 +518,7 @@ footer {
 /* --- Home Page: Sezione Progetti --- */
 
 #projects {
-    scroll-margin-top: 50px; /* Mi serve per far scorrere e fermarsi poco sopra i progetti*/
+    scroll-margin-top: 100px; /* Mi serve per far scorrere e fermarsi poco sopra i progetti*/
 }
 .projects-section { padding: 80px 0; }
 .section-title { text-align: center; margin-bottom: 60px; }
@@ -782,40 +817,46 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 
 /* Contenitore del logo nel menu */
 .mobile-logo-container {
-    /* 1. Lo posizioniamo in modo fisso in alto a sinistra */
     position: fixed;
-    top: -15px;   /* Distanza dal bordo superiore */
-    left: 30px;  /* Distanza dal bordo sinistro */
-    /* 2. Di default è invisibile e non cliccabile */
+    top: -15px;
+    left: 30px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 1.2s ease-in-out;
+    display: list-item;
 }
 
 /* Stile dell'immagine del logo */
 .mobile-logo-container img {
-    height: 60px; /* Diamo la stessa altezza del logo principale */
+    height: 60px;
     width: auto;
-}
-
-.mobile-logo-container {
-        display: list-item; /*Per far riapparire il logo su mobile */
-    }
-
-/* Quando il menu è ATTIVO, il logo appare */
-header nav ul.nav-active .mobile-logo-container {
-    opacity: 1;
-    pointer-events: all;
-    transition-delay: 0.2s; /* 4. Appare con un leggero ritardo, dopo l'apertura del cerchio */
+    transition: none;
 }
 
 /* HAMBURGHER MENU SU MOBILE */
 
- /* Mostra l'hamburger solo su mobile */
     .hamburger {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
     z-index: 1001; /* Sta sopra al menu */
 }
+
+nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+nav .nav-cta {
+    display: block;
+    width: 90%;
+    margin: 60px auto 0 auto;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 16px;
+    border-radius: 8px;
+  }
 
 /* Stile del menu (stato CHIUSO) */
 header nav ul {
@@ -825,7 +866,6 @@ header nav ul {
     width: 100%;
     height: 100vh;
     background-color: #ffffff;
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -860,8 +900,8 @@ header nav ul li {
 }
 
 header nav ul li a {
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
     
     /* Stato iniziale: invisibili e spostati in basso */
     opacity: 0;
@@ -898,6 +938,13 @@ header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
     text-align: center;
     } 
     */
+
+    .hover-text-container .hover-text { /*Su mobile il gradiente non avendo mouse è fisso al centro*/
+        opacity: 1 !important;
+        /* Centra la maschera radiale */
+        --x: 50%;
+        --y: 50%;
+      }
 
 .image-circle-background { width: 280px; height: 280px; }
 .hero-text h1 { font-size: 40px; }
