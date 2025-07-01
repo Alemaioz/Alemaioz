@@ -78,28 +78,8 @@ per il logo fixed che si sovrappone quando apro il menu hamburger*/
     display: none;
 }
 
-@media (max-width: 768px) {
-  .mobile-logo-container {
-    position: fixed;
-    top: -15px;
-    left: 30px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1.2s ease-in-out;
-    display: list-item;
-  }
-  .mobile-logo-container img {
-    height: 60px;
-    width: auto;
-    /* RIMOSSO OGNI MASCHERA */
-    transition: none;
-  }
-  header nav ul.nav-active .mobile-logo-container {
-    opacity: 1;
-    pointer-events: all;
-    transition-delay: 0.2s;
-  }
-}
+
+
 
 /* =========================== */
 /* STILI DEI COMPONENTI COMUNI */
@@ -177,9 +157,12 @@ nav {
   }
   
   /* Spazio tra i link e la CTA */
-  .nav-cta {
+nav .nav-cta {
     margin-left: 30px;
-    /* Puoi aggiungere altre regole per dimensioni, padding, ecc. */
+    padding: 8px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
   }
 
 nav ul {
@@ -202,7 +185,9 @@ nav a:hover {
     color: #000;
 }
 
-/* --- Bottoni --- */
+
+/* --- LE MIE CTA --- */
+
 .btn {
     font-family: 'Montserrat', sans-serif; /*Sto specificando un font solo per i bottoni */
     padding: 10px 28px;
@@ -230,8 +215,14 @@ nav a:hover {
 
 .btn-primary:hover {
     color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); /* Aggiunge un'ombra bluastra */
-    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(0, 68, 255, 0.18);
+    filter: brightness(0.9);
 }
 
 .btn-secondary {
@@ -282,6 +273,49 @@ footer {
 /* =========================== */
 
 /* --- Home Page: Sezione Hero --- */
+
+/* DOPPIA SCRITTA CON CAMBIO COLORE AL PASSAGGIO */
+
+.hover-text-container {
+    position: relative; /* Base per il posizionamento assoluto del figlio */
+    cursor: pointer;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.base-text {
+    color: #333; /* Colore del testo normale */
+}
+
+/* Testo colorato (sopra), con la maschera sfocata */
+.hover-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(135deg, #8c00ff, #074CFF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
+    /* 1. Di default, il testo colorato è completamente trasparente (invisibile) */
+    opacity: 0; 
+    
+    /* 2. Diciamo al browser di animare fluidamente ogni cambio di opacità */
+    transition: opacity 0.4s ease-in-out; 
+
+    /* La maschera rimane uguale, ma non serve più posizionarla fuori schermo all'inizio */
+    mask-image: radial-gradient(circle 100px at var(--x) var(--y), black 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 200px at var(--x) var(--y), black 20%, transparent 100%);
+}
+
+.hover-text-container:hover .hover-text {
+    opacity: 1; /* Quando il mouse è sul contenitore, il testo colorato diventa visibile */
+}
+
 .hero-section { display: flex; align-items: center; gap: 40px; padding: 60px 0; }
 .hero-text { flex: 1; }
 .hero-text h1 { font-size: 52px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
@@ -370,12 +404,22 @@ footer {
 }
 
 
-/*/////// CSS DELLA PAGINA CONTACT ///////*/
+.my-section-with-bg {
+    background-image: url('images/mesh_gradient2.png');
+    background-size: cover;         /* L’immagine copre tutta la sezione */
+    background-position: center;    /* Centra l’immagine */
+    background-repeat: no-repeat;   /* Non ripete l’immagine */
+  }
+
+
+
+
+
+/*/////// CSS DELLA PAGINA CONTATTI ///////*/
 
 /* Sezione con le card di contatto */
 .contact-options-section {
-    padding: 20px 0 80px 0; /* Meno padding sopra, più sotto */
-    background-color: #fff;
+    padding: 60px 0 60px 0; /* Meno padding sopra, più sotto */
 }
 
 .contact-grid {
@@ -392,6 +436,30 @@ footer {
     text-align: center;
     display: flex;
     flex-direction: column;
+}
+
+
+.contact-card.scroll-animate.animate-in {
+    transition: transform 0.22s cubic-bezier(0.4,0,0.2,1), box-shadow 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+/*Devo essere più specifico per aggiungere un hover perchè queste card
+hanno già un'animazione in ingresso*/
+.contact-card.scroll-animate.slide-left.animate-in:hover {
+    transform: translateX(0) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover sulle card con animazione da destra */
+.contact-card.scroll-animate.slide-right.animate-in:hover {
+    transform: translateX(0) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover sulle card con solo animazione di fade-in o base */
+.contact-card.scroll-animate.animate-in:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .contact-card-icon {
@@ -471,49 +539,6 @@ footer {
 }
 
 
-
-
-/* DOPPIA SCRITTA CON CAMBIO COLORE AL PASSAGGIO */
-
-.hover-text-container {
-    position: relative; /* Base per il posizionamento assoluto del figlio */
-    cursor: pointer;
-    font-size: 52px;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.base-text {
-    color: #333; /* Colore del testo normale */
-}
-
-/* Testo colorato (sopra), con la maschera sfocata */
-.hover-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: linear-gradient(135deg, #8c00ff, #074CFF);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    
-    /* 1. Di default, il testo colorato è completamente trasparente (invisibile) */
-    opacity: 0; 
-    
-    /* 2. Diciamo al browser di animare fluidamente ogni cambio di opacità */
-    transition: opacity 0.4s ease-in-out; 
-
-    /* La maschera rimane uguale, ma non serve più posizionarla fuori schermo all'inizio */
-    mask-image: radial-gradient(circle 100px at var(--x) var(--y), black 60%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle 200px at var(--x) var(--y), black 20%, transparent 100%);
-}
-
-.hover-text-container:hover .hover-text {
-    opacity: 1; /* Quando il mouse è sul contenitore, il testo colorato diventa visibile */
-}
 
 /* --- Home Page: Sezione Progetti --- */
 
@@ -788,19 +813,46 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 /* --- Breakpoint per Mobile (e schermi piccoli) --- */
 @media (max-width: 768px) {
 
+
     * { /*Per evitare che il colore di sfondo del bottone venga evidenziato quando si preme su mobile*/
         -webkit-tap-highlight-color: transparent;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
 
-/* --- REGOLE GENERALI --- */ /*Per far si che determinati testi si allineino a sinistra su mobile*/
+
+    .mobile-logo-container {
+        position: fixed;
+        top: -15px;
+        left: 30px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1.2s ease-in-out;
+        display: list-item;
+      }
+      .mobile-logo-container img {
+        height: 60px;
+        width: auto;
+        /* RIMOSSO OGNI MASCHERA */
+        transition: none;
+      }
+      header nav ul.nav-active .mobile-logo-container {
+        opacity: 1;
+        pointer-events: all;
+        transition-delay: 0.2s;
+      }
+
+
+
+/* --- REGOLE GENERALI --- */ 
+
+/*Per far si che determinati testi si allineino a sinistra su mobile*/
 .text-left-mobile,
 .text-left-mobile h2,
 .text-left-mobile p,
 .text-left-mobile .btn {
     text-align: left;
 }
-
+/*Per far si che la CTA si allinei a sinistra su mobile*/
 .btn-left-mobile-wrapper {
     text-align: left;
 }
@@ -848,15 +900,17 @@ nav {
     flex-direction: column;
     align-items: stretch;
   }
+
 nav .nav-cta {
     display: block;
     width: 90%;
     margin: 60px auto 0 auto;
     text-align: center;
-    padding: 12px 0;
+    padding: 10px 0;
     font-size: 16px;
     border-radius: 8px;
   }
+
 
 /* Stile del menu (stato CHIUSO) */
 header nav ul {
