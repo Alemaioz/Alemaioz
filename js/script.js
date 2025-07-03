@@ -200,3 +200,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gestisci anche il resize della finestra
     window.addEventListener('resize', handleScrollAnimations);
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//EFFETTO PARALLAX ALL IMMAGINE PROGETTO
+
+// Effetto parallax globale su tutte le immagini con classe .parallax-img
+window.addEventListener('mousemove', (e) => {
+    // Calcola il centro della finestra
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    // Calcola la distanza del mouse dal centro
+    const x = e.clientX - centerX;
+    const y = e.clientY - centerY;
+    // Normalizza tra -1 e 1
+    const normX = x / centerX;
+    const normY = y / centerY;
+    // Applica l'effetto a tutte le immagini con classe .parallax-img
+    document.querySelectorAll('.parallax-img').forEach(img => {
+      const rotateX = normY * 5; // max 10deg
+      const rotateY = normX * 5; // max 10deg
+      img.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+  });
+  
+  // Quando il mouse esce dalla finestra, resetta l'effetto
+  window.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.parallax-img').forEach(img => {
+      img.style.transform = 'rotateX(0deg) rotateY(0deg)';
+    });
+  });

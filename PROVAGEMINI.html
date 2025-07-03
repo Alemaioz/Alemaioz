@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluzione CSS Scroll Snap (Consigliata)</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, sans-serif;
+        }
+        /* Lo scroll snap è applicato all'intera pagina per la massima fluidità */
+        html {
+            scroll-snap-type: y proximity;
+        }
+        /* Tutte le sezioni che si agganciano */
+        .snap-section {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        /* Stile per la hero section */
+        .snap-section.hero-section {
+            background-color: #2c3e50;
+            color: white;
+            justify-content: flex-start; /* Allinea il contenuto in alto */
+        }
+        /* Il wrapper che limita il contenuto visibile al 60% */
+        .hero-content-wrapper {
+            height: 60vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Il restante 40% può essere usato per elementi di design, come una freccia */
+        .scroll-down-indicator {
+            margin-top: 15vh; /* Posiziona la freccia nello spazio "vuoto" */
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+        /* Sezione finale che non si aggancia */
+        .final-section {
+            height: 50vh;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Stili per le altre sezioni e testi */
+        .snap-section.s1 { background-color: #1abc9c; color: white; justify-content: center; }
+        .snap-section.s2 { background-color: #3498db; color: white; justify-content: center; }
+        h1 { font-size: 3rem; margin: 0; }
+        p { font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    
+    <section class="snap-section hero-section">
+        <div class="hero-content-wrapper">
+            <h1>Hero al 60%</h1>
+            <p>La transizione ora è perfettamente fluida.</p>
+        </div>
+        <div class="scroll-down-indicator">↓</div>
+    </section>
+
+    <section class="snap-section s1"><h1>Sezione 1</h1></section>
+    <section class="snap-section s2"><h1>Sezione 2</h1></section>
+
+    <footer class="final-section">
+        <h1>Footer</h1>
+        <p>Contenuto normale.</p>
+    </footer> <footer class="final-section">
+        <h1>Footer</h1>
+        <p>Contenuto normale.</p>
+    </footer> <footer class="final-section">
+        <h1>Footer</h1>
+        <p>Contenuto normale.</p>
+    </footer> <footer class="final-section">
+        <h1>Footer</h1>
+        <p>Contenuto normale.</p>
+    </footer>
+
+</body>
+</html>
