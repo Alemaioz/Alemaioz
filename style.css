@@ -35,11 +35,11 @@ html {
 .project-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 60vh;
+    height: 60vh;
     max-width: 1100px;
     margin: 0 auto;
     gap: 2rem;
-    padding: 2rem 0;
+    padding: 1rem 1rem;
     border-top: 1px solid #acacac3d;
     border-bottom: 1px solid #acacac3d;
     align-items: stretch;
@@ -47,19 +47,21 @@ html {
 
 .project-image,
 .project-text {
+    height: 100%;
     display: flex;
     align-items: center;
-    height: 100%;
+    justify-content: center;
 }
 
 .project-image {
     justify-content: center;
+    overflow: hidden;
     width: 100%;
     height: 100%;
 }
 
 .project-image img {
-    max-height: 80%;
+    max-height: 100%;
     max-width: 100%;
     object-fit: contain;
     display: block;
@@ -68,28 +70,27 @@ html {
 .project-text {
     flex-direction: column;
     justify-content: center;
-    /* Allinea il testo vicino all'immagine */
     align-items: flex-start;
     text-align: left;
-    padding-left: 2rem;
     padding-right: 0;
+    
 }
 
-/* Sezione reverse: testo a destra, immagine a sinistra */
-.project-section.reverse .project-text {
-    align-items: flex-end;
-    text-align: right;
-    padding-left: 0;
-    padding-right: 2rem;
-}
-
-
-
-
-/* Alternanza layout: reverse */
 .project-section.reverse {
-    direction: rtl;
-}
+    /* Inverte solo le colonne, NON il contenuto interno */
+    direction: ltr; /* assicurati che non sia rtl! */
+  }
+
+  .project-section.reverse > .project-image {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .project-section.reverse > .project-text {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
 
 
 /* Terza sezione: immagine e testo centrati */
@@ -658,9 +659,7 @@ hanno già un'animazione in ingresso*/
 
 /* --- Home Page: Sezione Progetti --- */
 
-#projects {
-    scroll-margin-top: 100px; /* Mi serve per far scorrere e fermarsi poco sopra i progetti*/
-}
+
 .section-title { text-align: center; margin-bottom: 60px; }
 .section-title h2 { font-size: 36px; font-weight: 700; margin-bottom: 15px; }
 .section-title p { font-size: 16px; color: #666; max-width: 600px; margin: 0 auto; }
@@ -966,16 +965,45 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 
 
 
-
     .project-section {
+        height: auto;
+        height: unset;
         grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 3rem 0;
+        gap: 1rem;
+        padding: 3rem 2rem;
       }
-      .project-section .project-text {
-        text-align: center;
+      .project-section > .project-image,
+      .project-section > .project-text {
+        grid-column: auto;
+        grid-row: auto;
+      }
+      .project-image img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
       }
 
+      .project-text {
+        align-items: flex-start;
+        text-align: left;
+        padding: 1rem 0;
+      }
+
+      .project-text .btn {
+        align-self: flex-start;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .project-section > .project-image,
+  .project-section > .project-text,
+  .project-section.reverse > .project-image,
+  .project-section.reverse > .project-text {
+    grid-column: auto ;
+    grid-row: auto ;
+  }
 
 
 
@@ -990,9 +1018,8 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 
 
 
-    .projects-grid {
-        gap: 30px;
-    }
+
+    
     .process-steps {
         flex-wrap: wrap;
         justify-content: center;
@@ -1006,37 +1033,6 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 
 /* --- Breakpoint per Mobile (e schermi piccoli) --- */
 @media (max-width: 768px) {
-
-
-
-
-
-
-
-
-
-    .project-section {
-        padding: 1rem 2rem;
-        gap: 1.5rem;
-      }
-      .project-section .project-image img {
-        max-width: 90vw;
-      }
-      .center-layout .project-image img {
-        max-width: 80vw;
-      }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1228,7 +1224,6 @@ header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
 
 .image-circle-background { width: 280px; height: 280px; }
 .hero-text h1 { font-size: 40px; }
-.projects-section {padding: 2rem 0;} /*Su mobile fornisco un padding specifico per la sezione progetti*/
 .projects-grid { grid-template-columns: 1fr; }
 .section-title h2 { font-size: 32px; }
 .about-content { flex-direction: column; gap: 20px;}
