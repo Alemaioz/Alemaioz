@@ -73,7 +73,51 @@ html {
     align-items: flex-start;
     text-align: left;
     padding-right: 0;
-    
+}
+
+/* Stili per i metadata dei progetti */
+.project-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.project-type,
+.project-duration {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.project-type {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.project-duration {
+    background-color: #f8f0ff; /* Versione molto chiara del viola del logo */
+    color: #b366ff; /* Versione più chiara del viola del logo */
+}
+
+/* Stili per i tag dei progetti */
+.project-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.project-tags span {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    background-color: #f5f5f5;
+    color: #666;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
 }
 
 .project-section.reverse {
@@ -320,13 +364,14 @@ nav a:hover {
 .btn-primary {
     color: #fff;
     border: 1px solid transparent;
-    background: linear-gradient(135deg, #0066ff, #0044ff);
+    background: #074CFF; /* Blu classico, accessibile */
     transition: all 0.3s ease; /* Transizione per un hover più fluido */
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.302);
 }
 
 .btn-primary:hover {
     color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.302);
 }
 
 .btn-primary:active,
@@ -340,6 +385,11 @@ nav a:hover {
     background-color: #000000;
     color: #ffffff;
     border: 1px solid #000000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.14); /* Ombra nera moderna */
+}
+
+.btn-secondary:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.18); /* Ombra nera più intensa in hover */
 }
 
 .btn svg {
@@ -935,12 +985,14 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 .btn.btn-light-outline {
     background-color: transparent;
     color: #fff;
-    border-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 8px;
 }
 
 .btn.btn-light-outline:hover {
     background-color: #fff;
     color: #111;
+    border-color: #fff;
 }
 
 .btn.btn-light-solid {
@@ -962,7 +1014,9 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 /* --- Breakpoint per Tablet (e schermi medi) --- */
 @media (max-width: 992px) {
 
-
+.hero-image { 
+    display: none;
+}
 
 
     .project-section {
@@ -1034,7 +1088,13 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 /* --- Breakpoint per Mobile (e schermi piccoli) --- */
 @media (max-width: 768px) {
 
-
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+      }
 
     * { /*Per evitare che il colore di sfondo del bottone venga evidenziato quando si preme su mobile*/
         -webkit-tap-highlight-color: transparent;
@@ -1064,6 +1124,11 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
       }
 
 
+      .container-narrow { /*Per evitare che il testo troppo lungo esca fuori decentrandosi a destra*/
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    
 
 /* --- REGOLE GENERALI --- */ 
 
@@ -1198,7 +1263,7 @@ header nav ul.nav-active li:nth-child(2) a { transition-delay: 0.2s; }
 header nav ul.nav-active li:nth-child(3) a { transition-delay: 0.3s; }
 header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
 
-.hero-section { flex-direction: column-reverse; text-align: center; }
+.hero-section { text-align: center;}
 .hero-text p { margin-left: auto; margin-right: auto; }
 .hero-buttons {
     display: flex;
@@ -1215,12 +1280,11 @@ header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
     } 
     */
 
-    .hover-text-container .hover-text { /*Su mobile il gradiente non avendo mouse è fisso al centro*/
-        opacity: 1 !important;
-        /* Centra la maschera radiale */
-        --x: 50%;
-        --y: 50%;
-      }
+.hover-text-container .hover-text { /*Su mobile il gradiente non avendo mouse è fisso al centro*/
+    opacity: 1 !important;
+    --x: 50%;
+    --y: 50%;
+}
 
 .image-circle-background { width: 280px; height: 280px; }
 .hero-text h1 { font-size: 40px; }
