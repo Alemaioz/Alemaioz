@@ -40,7 +40,6 @@ html {
     margin: 0 auto;
     gap: 2rem;
     padding: 1rem 1rem;
-    border-top: 1px solid #acacac3d;
     border-bottom: 1px solid #acacac3d;
     align-items: stretch;
 }
@@ -121,8 +120,7 @@ html {
 }
 
 .project-section.reverse {
-    /* Inverte solo le colonne, NON il contenuto interno */
-    direction: ltr; /* assicurati che non sia rtl! */
+    direction: ltr;
   }
 
   .project-section.reverse > .project-image {
@@ -134,17 +132,6 @@ html {
     grid-column: 1;
     grid-row: 1;
   }
-
-
-
-/* Terza sezione: immagine e testo centrati */
-.center-layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 2rem;
-}
 
 
 
@@ -397,6 +384,24 @@ nav a:hover {
     height: 18px;
 }
 
+/*Focus alle cta e i link per la navigazione da tastiera*/
+.btn:focus {
+    outline: none;
+  }
+.btn:focus-visible {
+    outline: 2px solid #b366ff;
+    outline-offset: 2px;
+    transition: box-shadow 0.2s;
+  }
+a:focus {
+    outline: none;
+  }
+a:focus-visible {
+    outline: 2px solid #b366ff;
+    outline-offset: 2px;
+  }
+
+
 /* --- Footer --- */
 footer {
     background-color: #222;
@@ -461,13 +466,8 @@ footer {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    
-    /* 1. Di default, il testo colorato è completamente trasparente (invisibile) */
-    opacity: 0; 
-    
-    /* 2. Diciamo al browser di animare fluidamente ogni cambio di opacità */
-    transition: opacity 0.4s ease-in-out; 
-
+    opacity: 0; /* 1. Di default, il testo colorato è completamente trasparente (invisibile) */    
+    transition: opacity 0.4s ease-in-out; /* 2. Diciamo al browser di animare fluidamente ogni cambio di opacità */
     /* La maschera rimane uguale, ma non serve più posizionarla fuori schermo all'inizio */
     mask-image: radial-gradient(circle 100px at var(--x) var(--y), black 60%, transparent 100%);
     -webkit-mask-image: radial-gradient(circle 200px at var(--x) var(--y), black 20%, transparent 100%);
@@ -570,9 +570,9 @@ footer {
     margin-bottom: 0;
 }
 
-
+/*Una classe per ogni sezione con background*/
 .my-section-with-bg {
-    background-image: url('images/mesh_gradient2.png');
+    background-image: url('images/mesh_gradient_black.jpg');
     background-size: cover;         /* L'immagine copre tutta la sezione */
     background-position: center;    /* Centra l'immagine */
     background-repeat: no-repeat;   /* Non ripete l'immagine */
@@ -713,7 +713,6 @@ hanno già un'animazione in ingresso*/
 .section-title { text-align: center; margin-bottom: 60px; }
 .section-title h2 { font-size: 36px; font-weight: 700; margin-bottom: 15px; }
 .section-title p { font-size: 16px; color: #666; max-width: 600px; margin: 0 auto; }
-.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
 .project-card { background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; text-decoration: none; color: inherit; }
 .project-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); }
 .project-card img {
@@ -1005,6 +1004,9 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
     background-color: #ddd;
     border-color: #ddd;
 }
+#projects {
+    scroll-margin-top: 70px;
+}
 
 
 /* ================================================= */
@@ -1026,6 +1028,8 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
         gap: 1rem;
         padding: 3rem 2rem;
       }
+      
+
       .project-section > .project-image,
       .project-section > .project-text {
         grid-column: auto;
@@ -1073,6 +1077,7 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
 
 
 
+
     
     .process-steps {
         flex-wrap: wrap;
@@ -1105,7 +1110,7 @@ blockquote { border-left: 3px solid #007bff; padding-left: 25px; margin: 0 0 20p
     .mobile-logo-container {
         position: fixed;
         top: -15px;
-        left: 30px;
+        left: 29px;
         opacity: 0;
         pointer-events: none;
         transition: opacity 1.2s ease-in-out;
@@ -1211,15 +1216,12 @@ header nav ul {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     pointer-events: none; /* Non è cliccabile quando è chiuso */
 
     /* Stato iniziale: un cerchio invisibile */
     clip-path: circle(0% at 90% 5%);
 
     /* TRANSIZIONE DI CHIUSURA */
-    /* Questa si attiva quando si RIMUOVE .nav-active */
-    /* Aspetta 0.3s (per far sparire i link), poi anima il cerchio per 0.4s */
     transition: clip-path 0.4s ease-in-out 0.2s;
 }
 
@@ -1229,28 +1231,25 @@ header nav ul.nav-active {
     pointer-events: all; /* Diventa cliccabile */
 
     /* TRANSIZIONE DI APERTURA */
-    /* Questa si attiva quando si AGGIUNGE .nav-active */
-    /* Anima subito, senza ritardo, per 0.6s */
     transition: clip-path 0.6s ease-in-out;
 }
 
 /* Stile e animazione dei singoli link */
 header nav ul li {
-    text-align: center;
     margin: 20px 0;
 }
 
 header nav ul li a {
     font-size: 20px;
     font-weight: 600;
-    
-    /* Stato iniziale: invisibili e spostati in basso */
-    opacity: 0;
+    opacity: 0;/* Stato iniziale: invisibili e spostati in basso */
     transform: translateY(15px);
-
-    /* La transizione per l'apparizione/scomparsa dei link */
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* La transizione per l'apparizione/scomparsa dei link */
 }
+
+header nav ul li:not(:first-child):not(:last-child) {
+    margin: 1px 0;
+  }
 
 /* Quando il menu è attivo, i link appaiono */
 header nav ul.nav-active li a {
@@ -1263,32 +1262,31 @@ header nav ul.nav-active li:nth-child(2) a { transition-delay: 0.2s; }
 header nav ul.nav-active li:nth-child(3) a { transition-delay: 0.3s; }
 header nav ul.nav-active li:nth-child(4) a { transition-delay: 0.4s; }
 
-.hero-section { text-align: center;}
-.hero-text p { margin-left: auto; margin-right: auto; }
+.hero-section { 
+    text-align: center; 
+    padding: 3.5rem 0 6.5rem 0;
+    }
+
+.hero-text p {
+     margin-left: auto; 
+     margin-right: auto; 
+    }
+
 .hero-buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-/* -Momentaneamente disattivata- LARGHEZZA UGUALE PER I BOTTONI IMPILATI CON TESTI DIFFERENTI 
-.hero-buttons .btn { /*
-    width: 90%;
-    max-width: 320px;
-    text-align: center;
-    } 
-    */
+    }
 
 .hover-text-container .hover-text { /*Su mobile il gradiente non avendo mouse è fisso al centro*/
-    opacity: 1 !important;
+    opacity: 1;
     --x: 50%;
     --y: 50%;
 }
 
 .image-circle-background { width: 280px; height: 280px; }
 .hero-text h1 { font-size: 40px; }
-.projects-grid { grid-template-columns: 1fr; }
 .section-title h2 { font-size: 32px; }
 .about-content { flex-direction: column; gap: 20px;}
 .about-text { text-align: center; order: 2; }
